@@ -59,13 +59,10 @@ module.exports = {
         "name": "CRASH",
         "phoneno": 4595235679,
         "fatherno": 456789465,
-        "permanentaddr": "B-571, Chitra Estate, Indore",
         "academics": {
             "attendance": 75,
             "yearofstudy": 2,
-            "semofstudy": 3,
             "branch": "IT",
-            "section": "C"
         },
         "hostel": {
             "roomno": 291,
