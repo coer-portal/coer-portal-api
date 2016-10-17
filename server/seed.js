@@ -58,6 +58,7 @@ module.exports = {
         "id": 15051018,
         "name": "CRASH",
         "phoneno": 4595235679,
+        "fatherno": 456789465,
         "permanentaddr": "B-571, Chitra Estate, Indore",
         "academics": {
             "attendance": 75,
@@ -71,17 +72,20 @@ module.exports = {
             "hostelCode": "KKB",
             "outpassesAlotted": [
                 {
+                    "outpassID": "171020160001",
                     "outpassDate": "17102016",
                     "outpassFromTime": "0900",
                     "outpassToTime": "0500",
                     "addrOfStay": "Roorkee",
                     "outpassPurpose": "Shopping",
                     "contactNum": 4567894641,
-                    "relationship": null
+                    "relation": null,
+                    "approved": 1
                 }
             ],
             "leavesAlotted": [
                 {
+                    "leaveID": "171020160001",
                     "leaveFromDate": "17102016",
                     "leaveToDate": "30102059",
                     "leaveFromTime": "1234",
@@ -89,7 +93,8 @@ module.exports = {
                     "addrOfStay": "HOME",
                     "leavePurpose": "HOME",
                     "contactNum": 4567946579,
-                    "relationship": null
+                    "relation": null,
+                    "approved": 0
                 }
             ]
         }

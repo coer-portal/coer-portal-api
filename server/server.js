@@ -4,8 +4,6 @@ require('dotenv').config();
 // Require Required Stuff
 var mongodb = require('mongodb');
 var mongo = mongodb.MongoClient;
-var Db = mongodb.Db;
-var Server = mongodb.Server;
 var express = require('express');
 var app = express();
 var seeddata = require('./seed');
@@ -23,22 +21,24 @@ try {
     console.log("App is running at http://localhost:" + PORT);
 }
 
-mongo.connect(MONGODB_URI, function (err, db) {
-    if (err) throw err;
-    console.log("Connected to MONGODB at " + MONGODB_URI);
-    var personal = db.collection('personal');
-    var secret = db.collection('secret');
-
-    personal.insert(seeddata.personal, function (err, result) {
-        if (err) throw err;
-        console.log(JSON.stringify(result.result.ok));
-    });
-
-    db.close();
-
-});
-
-
-app.get('/', function (req, res) {
-    res.send(process.env);
+app.get('/:authkey/:id', function (req, res) {
+    var authkey = req.params['authkey'],
+        id = req.params['id'];
+    if (authkey === "qwerfdsazxcv456789") {
+        mongo.connect(MONGODB_URI, function (err, db) {
+            if (err) throw err;
+            console.log("Connected to DB. Retrieving data for " + id);
+            var personal = db.collection('personal');
+            personal.find({
+                id: { $eq: +id }
+            }).toArray(function (err, docs) {
+                if (docs.length == 0) {
+                    res.send("NO record found");
+                } else {
+                    res.send(docs[0]);
+                }
+            });
+            db.close();
+        });
+    }
 });
