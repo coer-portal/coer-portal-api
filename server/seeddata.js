@@ -8,7 +8,8 @@
  *       "id": "coerid",
  *       "name": "CRASH",
  *       "phoneno": "10 digit number",
- *       "permanentaddr": "Long String",
+ *       "fatherno": "10 digit number",
+ *       "DOB": "Date of birth in ddmmyyyy format",
  *       "academics": {
  *           "attendance": "ATTENDANCE(float as string)",
  *           "yearofstudy": "1-4",
@@ -27,7 +28,8 @@
  *                   "addrOfStay": "Where'll be going to",
  *                   "outpassPurpose": "Purpose of going",
  *                   "contactNum": "Contact number",
- *                   "relationship": "What was this for?? Relationship to someone who might be living in that city?"
+ *                   "relationship": "What was this for?? Relationship to someone who might be living in that city?",
+ *                   "approved": boolean
  *               }
  *           ],
  *           "leavesAlotted": [
@@ -40,6 +42,7 @@
  *                   "leavePurpose": "Purpose of going",
  *                   "contactNum": "Contact number",
  *                   "relationship": "What was this for?? Relationship to someone who might be living in that city?"
+ *                   "approved": boolean
  *              }
  *           ]
  *       }
@@ -54,11 +57,14 @@
 // Actual Sample
 
 module.exports = {
-    "personal": {
-        "id": 15051018,
-        "name": "CRASH",
-        "phoneno": 4595235679,
-        "fatherno": 456789465,
+    "info": {
+        "personal": {
+            "id": 15051018,
+            "name": "CRASH",
+            "phoneno": 4595235679,
+            "fatherno": 456789465,
+            "DOB": "24011999",
+        },
         "academics": {
             "attendance": 75,
             "yearofstudy": 2,
