@@ -1,0 +1,27 @@
+{
+  "name": "coer-portal-api",
+  "version": "1.0.0",
+  "description": "Node API for the Collge portal",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coer-portal/coer-portal-api.git"
+  },
+  "keywords": [
+    "College of Engineering Roorkee",
+    "Node",
+    "express"
+  ],
+  "author": "Ishan Jain <ishanjain28@gmail.com> (github.com/ishanjain28)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coer-portal/coer-portal-api/issues"
+  },
+  "homepage": "https://github.com/coer-portal/coer-portal-api#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongodb": "^2.2.10"
+  }
+}

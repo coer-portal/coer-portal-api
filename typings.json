@@ -1,0 +1,6 @@
+{
+  "globalDependencies": {
+    "express": "registry:dt/express#4.0.0+20160708185218",
+    "mongodb": "registry:dt/mongodb#2.1.0+20160602142941"
+  }
+}
