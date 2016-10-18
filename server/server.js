@@ -122,8 +122,8 @@ app.post('/register', function (req, res) {
 
     // Rest of the data that will be required to complete registration is transferred as query. 
     // Kind of weird I guess but I think it's fine to transfer data like this. 
-    // Everything will be transferred over https
     var ID = req.query.ID,
+    // Everything will be transferred over https
         name = req.query.name,
         phoneno = req.query.phoneno,
         fatherno = req.query.fatherno,
@@ -135,14 +135,12 @@ app.post('/register', function (req, res) {
 
     var hostel = "hostel"
     if (req.query.currentStatus == 'dayscholar') {
-
         hostel = "no hostel";
-
     }
 
     // Check if supplied authentication key matches the one set in .env
     if (authkey == process.env.SUBMITKEY) {
-
+        console.log("\n" + authkey + " " + process.env.SUBMITKEY + "\n");
         mongo.connect(MONGODB_URI, function (err, db) {
 
             if (err) {
