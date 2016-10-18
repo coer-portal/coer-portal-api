@@ -2,75 +2,12 @@
  * This is Sample of the data that'll be stored in database
  */
 
-/*
- *{
- *  "personal": {
- *       "id": "coerid",
- *       "name": "CRASH",
- *       "phoneno": "10 digit number",
- *       "fatherno": "10 digit number",
- *       "DOB": "Date of birth in ddmmyyyy format",
- *       "academics": {
- *           "attendance": "ATTENDANCE(float as string)",
- *           "yearofstudy": "1-4",
- *           "semofstudy": "1-8",
- *           "branch": "CS || IT || CE || EN || ET || ",
- *           "section": "A-H"
- *       },
- *       "hostel": {
- *           "roomno": "INTEGER",
- *           "hostelCode": "BCJ || KKB || GSB || ARB || ASB || AHB || TAB || SAB || AKB",
- *           "outpassesAlotted": [
- *               {
- *                   "outpassDate": "date in ddmmyyyy format",
- *                   "outpassFrom": "Time in hhmm format",
- *                   "outpassTo": "Time in hhmm format",
- *                   "addrOfStay": "Where'll be going to",
- *                   "outpassPurpose": "Purpose of going",
- *                   "contactNum": "Contact number",
- *                   "relationship": "What was this for?? Relationship to someone who might be living in that city?",
- *                   "approved": boolean
- *               }
- *           ],
- *           "leavesAlotted": [
- *               {
- *                   "leaveFromDate": "date in ddmmyyyy format",
- *                   "leaveToDate": "date in ddmmyyyy format",
- *                   "leaveFromTime": "Time in hhmm format",
- *                   "leaveToTime": "Time in hhmm format",
- *                   "addrOfStay": "Where'll be going to",
- *                   "leavePurpose": "Purpose of going",
- *                   "contactNum": "Contact number",
- *                   "relationship": "What was this for?? Relationship to someone who might be living in that city?"
- *                   "approved": boolean
- *              }
- *           ]
- *       }
- *   },
- *   "secret": {
- *       "id": "coerid",
- *       "password": "Shh.ASecret521431"
- *   }
- * }
- */
-
 // Actual Sample
-
-module.exports = {
-    "info": {
-        "personal": {
-            "id": 15051018,
-            "name": "CRASH",
-            "phoneno": 4595235679,
-            "fatherno": 456789465,
-            "DOB": "24011999",
-        },
-        "academics": {
-            "attendance": 75,
-            "yearofstudy": 2,
-            "branch": "IT",
-        },
-        "hostel": {
+function getHostel(hostel) {
+    if (hostel == "no hostel") {
+        return null;
+    } else {
+        return {
             "roomno": 291,
             "hostelCode": "KKB",
             "outpassesAlotted": [
@@ -101,9 +38,33 @@ module.exports = {
                 }
             ]
         }
-    },
-    "secret": {
-        "id": 15051018,
-        "password": "Shh.ASecret521431"
+    }
+}
+module.exports = {
+    "info": function (ID, name, phoneno, fatherno, DOB, currentStatus, hostel) {
+        return {
+            "info": {
+                "_id": ID,
+                "personal": {
+                    "name": name,
+                    "phoneno": phoneno,
+                    "fatherno": fatherno,
+                    "DOB": DOB,
+                    "currentStatus": currentStatus
+                },
+                "academics": {
+                    "attendance": 75,
+                    "yearofstudy": 2,
+                    "branch": "IT",
+                },
+                "hostel": getHostel(hostel)
+            },
+            "secret": function (pass, id) {
+                return {
+                    "id": +id,
+                    "password": +pass
+                }
+            }
+        }
     }
 }
