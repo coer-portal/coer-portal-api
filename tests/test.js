@@ -1,8 +1,7 @@
+// unirest is required to do REST stuff in Node
 var unirest = require('unirest');
 
-
-console.log(APIURL);
-
+// Check the type of test you want to do and pass it as an argument
 if (process.argv[2] == "get") {
     var APIURL = "http://localhost:5000/student/" + process.argv[3];
     unirest

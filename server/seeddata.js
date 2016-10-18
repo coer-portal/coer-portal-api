@@ -1,12 +1,54 @@
 /* Seed Database
- * This is Sample of the data that'll be stored in database
+ * This is Template of the data that'll be stored in database
  */
 
-// Actual Sample
-function getHostel(hostel) {
-    if (hostel == "no hostel") {
+// Require is like import. 
+var unirest = require('unirest');
+
+// Function to get Attendance from College server
+// They just give the whole HTML page. So I used split and substr to get the information I want
+// Takes attendance and Last Updated Date.
+function getAttendance(ID) {
+
+    try {
+        return unirest
+            .post('http://coer.ac.in/atten.php')
+            .field('coerid', ID)
+            .end(function (res) {
+
+                if (res.error) {
+                    throw res.error;
+                } else {
+                    // TODO: Use Cheerio here, Instead of using a hacky solution
+                    var Attendance = res.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6);
+
+                    // This is wrong.
+                    // TODO: Find some other way to return Attendance and attendanceLastUpdatedOn
+                    return Attendance;
+                }
+            });
+    } catch (e) {
+
+        console.log("Error Retrieving Attendance\n" + e);
+
         return null;
+
+    }
+
+}
+// getAttendance(15041121);
+
+
+// Function that returns correct value of hostel by checking the value of hostel supplied to it. 
+// Returns null if student is a Day Scholar and returns correct properties if student is a hosteler
+function getHostel(hostel) {
+
+    if (hostel == "no hostel") {
+
+        return null;
+
     } else {
+
         return {
             "roomno": 291,
             "hostelCode": "KKB",
@@ -40,31 +82,36 @@ function getHostel(hostel) {
         }
     }
 }
+
 module.exports = {
+// info is a method that returns a JSON template with all the value filled up.
     "info": function (ID, name, phoneno, fatherno, DOB, currentStatus, hostel) {
         return {
-            "info": {
-                "_id": ID,
-                "personal": {
-                    "name": name,
-                    "phoneno": phoneno,
-                    "fatherno": fatherno,
-                    "DOB": DOB,
-                    "currentStatus": currentStatus
-                },
-                "academics": {
-                    "attendance": 75,
-                    "yearofstudy": 2,
-                    "branch": "IT",
-                },
-                "hostel": getHostel(hostel)
+            "_id": ID,
+            "personal": {
+                "name": name,
+                "phoneno": phoneno,
+                "fatherno": fatherno,
+                "DOB": DOB,
+                "currentStatus": currentStatus
             },
-            "secret": function (pass, id) {
-                return {
-                    "id": +id,
-                    "password": +pass
-                }
-            }
+            "academics": {
+                "attendance": getAttendance(ID),
+                "attendanceLastUpdatedOn": '18102016',
+                "yearofstudy": 2,
+                "branch": "IT",
+
+            },
+            "hostel": getHostel(hostel)
+        }
+    },
+    // Secret is a function that will return a JSON to be stored in secret collection in DB.
+    // Works exactly like info.
+    // TODO: Implementation is not complete yet.
+    "secret": function (pass, id) {
+        return {
+            "id": +id,
+            "password": +pass
         }
     }
 }
