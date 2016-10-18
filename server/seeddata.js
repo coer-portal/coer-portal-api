@@ -19,11 +19,11 @@ function getAttendance(ID) {
                 console.error(res.error);
             } else {
                 // TODO: Use Cheerio here, Instead of using a hacky solution
-                var Attendance = res.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6);
+                // var Attendance = res.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6);
 
                 // This is wrong.
                 // TODO: Find some other way to return Attendance and attendanceLastUpdatedOn
-                console.log(Attendance);
+                // console.log(Attendance);
             }
         });
     return null;
@@ -103,8 +103,8 @@ module.exports = {
     // TODO: Implementation is not complete yet.
     "secret": function (pass, id) {
         return {
-            "id": +id,
-            "password": +pass
+            "id": id,
+            "password": pass
         }
     }
 }

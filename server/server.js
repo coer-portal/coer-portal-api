@@ -14,6 +14,7 @@ var fs = require('fs');
 var PORT = process.env.PORT || process.env.APP_PORT;
 var MONGODB_URI = process.env.MONGODB_URI || process.env.MONGOURL;
 
+console.log("PORT: " + PORT + "\nMONGODB_URL: " + MONGODB_URI + "\nACCESSKEY: " + process.env.ACCESSKEY + "\nSUBMITKEY: " + process.env.SUBMITKEY + "\n")
 // Starting web server
 try {
 
@@ -54,9 +55,7 @@ function sendResCode(code, response, msg) {
 app.get('/:user/:id', function (req, res) {
 
     var authkey = req.headers.authkey,
-
         id = req.params['id'],
-
         user = req.params['user'];
 
     if (authkey === process.env.ACCESSKEY) {
@@ -84,28 +83,23 @@ app.get('/:user/:id', function (req, res) {
 
                         if (docs.length == 0) {
 
-                            res.send("No record found");
-
+                            res.send("\nNo record found\n");
+                            console.log("\nNo Record Found\n")
                         } else {
-
+                            console.log("\nRecord Found!\n");
                             res.send(JSON.stringify(docs[0]));
 
                         }
 
                     });
-
                     db.close(function () {
 
                         console.log("Closed connection after retrieving data for ID " + id + "\n");
 
                     });
-
                 }
-
             });
-
         }
-
     } else {
 
         // The user is not authorized to access database. So, return a 401 code which means Unauthorized access and a message saying the same
@@ -118,12 +112,12 @@ app.get('/:user/:id', function (req, res) {
 app.post('/register', function (req, res) {
 
     // Authentication Key provided in header. "authkey"
-    var authkey = req.headers.authkey;
+    var authkey = req.headers.authkey || null;
 
     // Rest of the data that will be required to complete registration is transferred as query. 
     // Kind of weird I guess but I think it's fine to transfer data like this. 
     var ID = req.query.ID,
-    // Everything will be transferred over https
+        // Everything will be transferred over https
         name = req.query.name,
         phoneno = req.query.phoneno,
         fatherno = req.query.fatherno,
@@ -140,7 +134,6 @@ app.post('/register', function (req, res) {
 
     // Check if supplied authentication key matches the one set in .env
     if (authkey == process.env.SUBMITKEY) {
-        console.log("\n" + authkey + " " + process.env.SUBMITKEY + "\n");
         mongo.connect(MONGODB_URI, function (err, db) {
 
             if (err) {
@@ -148,7 +141,7 @@ app.post('/register', function (req, res) {
                 throw err;
 
             } else {
-
+                // Select collection named information
                 var information = db.collection('information');
 
                 // First check if the user already exists in database
@@ -163,7 +156,7 @@ app.post('/register', function (req, res) {
                     if (docs.length === 0) {
 
                         // Print to console "User doesn't exists in DB
-                        console.log("User does not exists. Registering in database" + "\n");
+                        console.log("\nUser does not exists. Registering in database\n");
 
                         // Insert the JSON in database
                         // seeddata.info method is used to generate a JSON using provided data and template and give that as 
@@ -171,16 +164,17 @@ app.post('/register', function (req, res) {
                         information.insert(seeddata.info(ID, name, phoneno, fatherno, DOB, currentStatus, hostel), function (err, result) {
 
                             // Watch out for errors
-                            if (err) throw err;
+                            if (err) {
+                                throw err;
+                            } else {
 
-                            // Send the result to client
-                            res.send(result);
+                                // Send the result to client
+                                res.send(result);
 
-                            // Print the JSON to console
-                            console.log(JSON.stringify(seeddata.info(ID, name, phoneno, fatherno, DOB, currentStatus, hostel)) + "\n");
-
+                                // Print the JSON to console
+                                console.log(JSON.stringify(seeddata.info(ID, name, phoneno, fatherno, DOB, currentStatus, hostel)) + "\n");
+                            }
                         });
-
                     } else {
 
                         // Print user already exists
@@ -190,11 +184,12 @@ app.post('/register', function (req, res) {
                         console.log(JSON.stringify(docs[0]));
 
                         // Send the same as the result of this call
-                        res.send(docs);
+                        res.send(docs[0]);
 
                     }
-
-                    db.close();
+                    db.close(function () {
+                        console.log("Closing database after completing POST operation to /register");
+                    });
 
                 })
 

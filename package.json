@@ -4,7 +4,7 @@
   "description": "Node API for the Collge portal",
   "scripts": {
     "create-env": "cp sample.env .env",
-    "start": "node server/server.js"
+    "start": "npm run create-env && node server/server.js"
   },
   "repository": {
     "type": "git",

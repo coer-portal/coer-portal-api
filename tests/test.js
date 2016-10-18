@@ -13,7 +13,7 @@ if (process.argv[2] == "get") {
 }
 
 if (process.argv[2] == "post") {
-    var APIURL1 = "http://localhost:5000/register";
+    var APIURL1 = "https://coer-backend.herokuapp.com/register";
     unirest
         .post(APIURL1)
         .headers({ 'authkey': 'SUPERPRIVATE' })
@@ -23,7 +23,7 @@ if (process.argv[2] == "post") {
             phoneno: 94567984314,
             fatherno: 7987465123,
             DOB: 24012016,
-            currentStatus: "hostel"
+            currentStatus: "dayscholar"
         })
         .end(function (res) {
             console.log(res.raw_body)
