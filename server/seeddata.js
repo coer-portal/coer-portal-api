@@ -10,32 +10,25 @@ var unirest = require('unirest');
 // Takes attendance and Last Updated Date.
 function getAttendance(ID) {
 
-    try {
-        return unirest
-            .post('http://coer.ac.in/atten.php')
-            .field('coerid', ID)
-            .end(function (res) {
+    unirest
+        .post('http://coer.ac.in/atten.php')
+        .field('coerid', ID)
+        .end(function (res) {
 
-                if (res.error) {
-                    throw res.error;
-                } else {
-                    // TODO: Use Cheerio here, Instead of using a hacky solution
-                    var Attendance = res.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6);
+            if (res.error) {
+                console.error(res.error);
+            } else {
+                // TODO: Use Cheerio here, Instead of using a hacky solution
+                var Attendance = res.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6);
 
-                    // This is wrong.
-                    // TODO: Find some other way to return Attendance and attendanceLastUpdatedOn
-                    return Attendance;
-                }
-            });
-    } catch (e) {
-
-        console.log("Error Retrieving Attendance\n" + e);
-
-        return null;
-
-    }
-
+                // This is wrong.
+                // TODO: Find some other way to return Attendance and attendanceLastUpdatedOn
+                console.log(Attendance);
+            }
+        });
+    return null;
 }
+
 // getAttendance(15041121);
 
 
@@ -84,7 +77,7 @@ function getHostel(hostel) {
 }
 
 module.exports = {
-// info is a method that returns a JSON template with all the value filled up.
+    // info is a method that returns a JSON template with all the value filled up.
     "info": function (ID, name, phoneno, fatherno, DOB, currentStatus, hostel) {
         return {
             "_id": ID,

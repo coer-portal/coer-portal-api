@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Node API for the Collge portal",
   "scripts": {
+    "create-env": "cp sample.env .env",
     "start": "node server/server.js"
   },
   "repository": {
@@ -23,6 +24,7 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "dotenv": "^2.0.0",
+    "eslint": "^3.8.1",
     "express": "^4.14.0",
     "mongodb": "^2.2.10",
     "unirest": "^0.5.1"

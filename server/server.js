@@ -73,14 +73,9 @@ app.get('/:user/:id', function (req, res) {
 
                     console.log("Connected to DB. retrieving data for ID " + id + "\n");
 
-
-
-
-
                     var information = db.collection('information');
 
                     // Find people with given ID in information collection
-
                     information.find({
 
                         _id: { $eq: id }
@@ -118,14 +113,9 @@ app.get('/:user/:id', function (req, res) {
 
     }
 
-
 });
 
-
-
 app.post('/register', function (req, res) {
-
-
 
     // Authentication Key provided in header. "authkey"
     var authkey = req.headers.authkey;
@@ -142,9 +132,11 @@ app.post('/register', function (req, res) {
 
     // This method sets hostel field in database to null if the student is Day Scholar and doesn't lives in Hostel
     // hostel variable is passsed to seeddata.info method and the functions in seeddata.js check the value and set hostel property accordingly
+
+    var hostel = "hostel"
     if (req.query.currentStatus == 'dayscholar') {
 
-        var hostel = "no hostel";
+        hostel = "no hostel";
 
     }
 
