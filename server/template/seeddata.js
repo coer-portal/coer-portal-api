@@ -9,27 +9,26 @@ var unirest = require('unirest');
 // They just give the whole HTML page. So I used split and substr to get the information I want
 // Takes attendance and Last Updated Date.
 function getAttendance(ID) {
-
-    unirest
+    var Attendance = null,
+        attendanceLastUpdatedOn = null;
+    console.log(unirest
         .post('http://coer.ac.in/atten.php')
         .field('coerid', ID)
         .end(function (res) {
 
             if (res.error) {
-                console.error(res.error);
+                return res.error;
             } else {
                 // TODO: Use Cheerio here, Instead of using a hacky solution
-                // var Attendance = res.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6);
+                return res.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6);
 
                 // This is wrong.
                 // TODO: Find some other way to return Attendance and attendanceLastUpdatedOn
-                // console.log(Attendance);
             }
-        });
-    return null;
+        })
+    );
 }
-
-// getAttendance(15041121);
+getAttendance(15041121);
 
 
 // Function that returns correct value of hostel by checking the value of hostel supplied to it. 
