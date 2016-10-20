@@ -10,7 +10,7 @@ function getRecord(URL, ID) {
             console.log(res.body);
         });
 }
-postRecord("http://localhost:5000/student/register", 15051019, "ISHAN JAIN", 9457894561, 4657981234, 24012016, "hostel");
+postRecord("http://coer-backend.herokuapp.com/student/register", 15051024, "ISHAN JAIN", 9457894561, 4657981234, 24012016, "hostel");
 // getRecord(15051020);
 function postRecord(URI, ID, name, phoneno, fatherno, DOB, currentStatus) {
     unirest

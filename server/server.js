@@ -46,4 +46,4 @@ app.post('/student/register', function (req, res) { route.studentRegister(req, r
 
 
 
-app.get('/student/:id/attendance', function (req, res) { route.studentAttendance(req, res) });
+app.get('/student/attendance/:id', function (req, res) { route.studentAttendance(req, res) });
