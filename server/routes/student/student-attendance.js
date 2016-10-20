@@ -13,7 +13,7 @@ function studentAttendance(req, res) {
                     "attendance": response.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6),
                     "attenLastUpdated": response.raw_body.split("<p>")[1].split("</p>")[0].split(" Update ")[1]
                 }
-                res.send(JSON.parse(attendance));
+                res.send(attendance);
             }
         });
 }
