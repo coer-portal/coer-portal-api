@@ -1,5 +1,5 @@
 # College of Engineering, Roorkee - API
-API created with Node+express+MongoDB
+This API will help in storing and routing of data on our servers. Currently, This API will be used in our Android App and we plan on creating a web app for this as well. It's like a hobby project that can teach us a lot of things about web that we don't know. 
 
 # Usage
 
@@ -110,3 +110,10 @@ What ever fields you want to update in Database. In ```JSON``` or ```urlencoded`
 #### Output
 
 JSON object with status of update.
+
+
+## Disclaimer and Some stuff that I am not sure where to put
+
+I used Node as the base, Express.js for Routing and MongoDB to store data. Also, Thanks to guys at Mashape.com for creating unirest.io. 
+
+Not licensed but if you are using our project or a part of our project, Please let us know. It'll such a good news!
