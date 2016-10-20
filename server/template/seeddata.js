@@ -11,24 +11,9 @@ var unirest = require('unirest');
 function getAttendance(ID) {
     var Attendance = null,
         attendanceLastUpdatedOn = null;
-    console.log(unirest
-        .post('http://coer.ac.in/atten.php')
-        .field('coerid', ID)
-        .end(function (res) {
-
-            if (res.error) {
-                return res.error;
-            } else {
-                // TODO: Use Cheerio here, Instead of using a hacky solution
-                return res.raw_body.split("<h3>")[1].split("</h3>")[0].split("%")[0].substr(String.length - 6);
-
-                // This is wrong.
-                // TODO: Find some other way to return Attendance and attendanceLastUpdatedOn
-            }
-        })
-    );
+    
 }
-getAttendance(15041121);
+getAttendance(15051017);
 
 
 // Function that returns correct value of hostel by checking the value of hostel supplied to it. 
