@@ -43,3 +43,7 @@ app.get('/student/:id', function (req, res) { route.studentGetByID(req, res) });
 
 // route that handles Registration.
 app.post('/student/register', function (req, res) { route.studentRegister(req, res) });
+
+
+
+app.get('/student/:id/attendance', function (req, res) { route.studentAttendance(req, res) });

@@ -89,13 +89,9 @@ function studentRegister(req, res) {
                     db.close(function () {
                         console.log("Closing database after completing POST operation to /register");
                     });
-
                 })
-
             }
-
         });
-
     } else {
 
         // Unauthorized to access database. Send a 401 and a message. 
