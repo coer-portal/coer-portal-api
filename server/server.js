@@ -32,7 +32,7 @@ try {
 
 // Set to send a 404 on any kind of request to '/'
 app.all('/', function (req, res) {
-    sendResCode(req, res)
+    sendResCode(404, res, "Error 404: Resource not found");
 });
 
 
