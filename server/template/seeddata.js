@@ -2,19 +2,6 @@
  * This is Template of the data that'll be stored in database
  */
 
-// Require is like import. 
-var unirest = require('unirest');
-
-// Function to get Attendance from College server
-// They just give the whole HTML page. So I used split and substr to get the information I want
-// Takes attendance and Last Updated Date.
-function getAttendance(ID) {
-    var Attendance = null,
-        attendanceLastUpdatedOn = null;
-    
-}
-getAttendance(15051017);
-
 
 // Function that returns correct value of hostel by checking the value of hostel supplied to it. 
 // Returns null if student is a Day Scholar and returns correct properties if student is a hosteler
@@ -73,10 +60,9 @@ module.exports = {
                 "currentStatus": currentStatus
             },
             "academics": {
-                "attendance": getAttendance(ID),
-                "attendanceLastUpdatedOn": '18102016',
                 "yearofstudy": 2,
                 "branch": "IT",
+                "section": "C"
 
             },
             "hostel": getHostel(hostel)
