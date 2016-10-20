@@ -31,13 +31,13 @@ A Student can ```GET``` or ```POST``` information about himself/herself.
 ---- 
 
 #### URL Example: 
-> ```https://coer-backend.herokuapp.com/student/attendance/:id```
+    https://coer-backend.herokuapp.com/student/attendance/:id
 
 #### Authentication: 
 > No Authentication is required to access this.
 
 #### Output:
-> JSON(parsed), ```{"attendance":"71.03","attenLastUpdated":"14 Oct 2016"}```
+ JSON(parsed), ```{"attendance":"71.03","attenLastUpdated":"14 Oct 2016"}```
 
 ---- 
 
@@ -46,7 +46,7 @@ A Student can ```GET``` or ```POST``` information about himself/herself.
 ---- 
 
 #### URL Example: 
-> ```https://coer-backend.herokuapp.com/student/full/:id```
+    https://coer-backend.herokuapp.com/student/full/:id
 
 #### Authentication: 
 > Authentication is required. A key has to supplied in header with the key name 'authkey'
@@ -66,7 +66,7 @@ A Student can ```GET``` or ```POST``` information about himself/herself.
 ----
 
 #### URL Example: 
-> ```https://coer-backend.herokuapp.com/student/register```
+    https://coer-backend.herokuapp.com/student/register
 
 #### Authentication: 
 > Authentication is required. A key has to supplied in header with the key name 'authkey'
@@ -75,7 +75,7 @@ A Student can ```GET``` or ```POST``` information about himself/herself.
 
 The input can be urlencoded or JSON. I am using urlencoded for now but that can change. 
 
-> ```"ID=13467981&phoneno=7984561320&fatherno=3216549871&DOB=21112016&currentStatus=hostel"```
+    "ID=13467981&phoneno=7984561320&fatherno=3216549871&DOB=21112016&currentStatus=hostel"
 
 ID = Given by college
 
@@ -98,7 +98,7 @@ currentStatus = Can be ```hostel``` or ```dayscholar```
 ----
 
 #### URL Example:
-> ```https://coer-backend.herokuapp.com/student/update```
+    https://coer-backend.herokuapp.com/student/update
 
 #### Authentication: 
 > Authentication is required. Same as everything else that requires authentication.
@@ -107,6 +107,6 @@ currentStatus = Can be ```hostel``` or ```dayscholar```
 
 What ever fields you want to update in Database. In ```JSON``` or ```urlencoded``` form
 
-### Output
+#### Output
 
 JSON object with status of update.
