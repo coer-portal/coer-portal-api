@@ -1,8 +1,0 @@
-{
-  "globalDependencies": {
-    "dotenv": "registry:dt/dotenv#2.0.0+20160327131627",
-    "express": "registry:dt/express#4.0.0+20160708185218",
-    "mongodb": "registry:dt/mongodb#2.1.0+20160602142941",
-    "node": "registry:dt/node#6.0.0+20161014191813"
-  }
-}
