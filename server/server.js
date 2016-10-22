@@ -35,7 +35,7 @@ app.all('/', function (req, res) {
 // get all the data about a student using ID as input.
 // user depends on who is accessing database and can have 2 possible values. student or warden
 // AUTHKEY is stored in .env file and removed from Git. Check sample.env for an example
-app.get('/student/full/ :id', function (req, res) { route.studentGetByID(req, res) });
+app.get('/student/full/:id', function (req, res) { route.studentGetByID(req, res) });
 
 // route that handles Registration.
 app.post('/student/register', function (req, res) { route.studentRegister(req, res) });

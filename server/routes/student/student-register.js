@@ -1,5 +1,4 @@
 
-
 var mongodb = require('mongodb');
 var mongo = mongodb.MongoClient;
 var sendResCode = require('../../sendResCode');
@@ -27,6 +26,7 @@ function studentRegister(req, res) {
         "currentStatus": req.query.currentStatus
     }
 
+    console.log(AttendanceURL);
     // This method sets hostel field in database to null if the student is Day Scholar and doesn't lives in Hostel
     // hostel variable is passsed to template.info method and the functions in template.js check the value and set hostel property accordingly
     var hostel = "hostel"
@@ -67,6 +67,7 @@ function studentRegister(req, res) {
     // if (validateUserData(userData, validationCallback)) {
     // Check if supplied authentication key matches the one set in .env
     if (authkey == process.env.SUBMITKEY) {
+        var AttendanceURL = 'http://' + req.hostname + ':' + PORT + '/student/attendance/' + userData._id;
         mongo.connect(MONGODB_URI, function (err, db) {
             if (err) {
                 throw err;
@@ -77,7 +78,7 @@ function studentRegister(req, res) {
                 // First check if the user already exists in database
                 // If user exists then return it's details
                 information.find({ _id: { $eq: userData._id } }).toArray(function (err, docs) {
-
+                    console.log(userData);
                     // watch  for errors
                     if (err) throw err;
 
@@ -88,31 +89,29 @@ function studentRegister(req, res) {
                         // Print to console "User doesn't exists in DB
                         console.log("\nUser does not exists. Registering in database\n");
 
-                        /* Insert the JSON in database
-                         * template.info method is used to generate a JSON using provided data and template and give that as 
-                         * an input to .insert method
-                         */
-                        information.insert(template.info(userData._id, userData.phoneno, userData.fatherno, userData.DOB, userData.currentStatus, hostel), function (err, result) {
+                        unirest.get(AttendanceURL).end(function (response) {
+                            // Gets name, Attedance and attenLastUpdatedOn from College database and pass it in template.info and update it in database. 
+                            if (response.error) throw response.error;
+                            /* Insert the JSON in database
+                             * template.info method is used to generate a JSON using provided data and template and give that as 
+                             * an input to .insert method
+                             */
+                            information.insert(template.info(userData._id, response.raw_body.name, userData.phoneno, userData.fatherno, userData.DOB, userData.currentStatus, response.raw_body.attendance, response.raw_body.attenLastUpdated, hostel), function (err, result) {
 
-                            // Watch for errors
-                            if (err) {
-                                throw err;
-                            } else {
-                                // Update name, Attedance and attenLastUpdatedOn in database because they are retrieved from College Database
-                                var AttendanceURL = 'http://' + req.hostname + ':' + PORT + '/student/attendance/' + userData._id;
-                                console.log(AttendanceURL);
-                                unirest.get(AttendanceURL).end(function (response) {
-                                    if (response.error) throw response.error;
-                                    // Nothing to do here. 
-                                    // I created this function so I can call /student/attendance/:id
-                                    //  When I will get that url it'll get the attendance and name and update it in database.
-                                    // I don't have anything to do with response in this case. 
-                                    // If I had taken an alternate approach than this would've been pretty good way to go
-                                }, updateCallback(res, result, information));
+                                // Watch for errors
+                                if (err) {
+                                    throw err;
+                                } else {
+                                    // Print the JSON to console
+                                    console.log(JSON.stringify(template.info(userData._id, response.raw_body.name, userData.phoneno, userData.fatherno, userData.DOB, userData.currentStatus, response.raw_body.attendance, response.raw_body.attenLastUpdatedOn, hostel)) + "\n");
+                                    res.send(template.info(userData._id, response.raw_body.name, userData.phoneno, userData.fatherno, userData.DOB, userData.currentStatus, response.raw_body.attendance, response.raw_body.attenLastUpdatedOn, hostel));
+                                }
 
-                                // Print the JSON to console
-                                console.log(JSON.stringify(template.info(userData._id, userData.phoneno, userData.fatherno, userData.DOB, userData.currentStatus, hostel)) + "\n");
-                            }
+                            });
+
+                            db.close(function () {
+                                console.log("Closing database after completing a POST operation. Request came from " + + req.path);
+                            });
                         });
                     } else {
 
@@ -125,10 +124,11 @@ function studentRegister(req, res) {
                         // Send the same as the result of this call
                         res.send(docs[0]);
 
+                        db.close(function () {
+                            console.log("Closing database after completing POST operation to " + req.path);
+                        });
+
                     }
-                    db.close(function () {
-                        console.log("Closing database after completing POST operation to " + req.path);
-                    });
                 })
             }
         });
@@ -151,11 +151,4 @@ function studentRegister(req, res) {
 //     return trueArray.indexOf(false) === -1;
 // }
 
-function updateCallback(res, id, information) {
-    // Send the result to client
-    information.find({ _id: { $eq: id } }).toArray(function (err, docs) {
-        res.send(docs[0]);
-    });
-    
-}
 module.exports = studentRegister;

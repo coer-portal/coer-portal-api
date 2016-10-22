@@ -43,14 +43,13 @@ function getHostel(hostel) {
     }
 }
 
-console.log(JSON.stringify(data.userData));
 module.exports = {
     // info is a method that returns a JSON template with all the value filled up.
-    "info": function (_id, phoneno, fatherno, DOB, currentStatus, hostel) {
+    "info": function (_id, name, phoneno, fatherno, DOB, currentStatus, attendance, attenLastUpdatedOn, hostel) {
         return {
             "_id": _id,
             "personal": {
-                "name": data.name,
+                "name": name,
                 "phoneno": phoneno,
                 "fatherno": fatherno,
                 "DOB": DOB,
@@ -58,8 +57,8 @@ module.exports = {
             },
             "academics": {
                 "attendance": {
-                    "attendance": data.attendance,
-                    "attenLastUpdatedOn": data.attenLastUpdatedOn
+                    "attendance": attendance,
+                    "attenLastUpdatedOn": attenLastUpdatedOn
                 },
                 "yearofstudy": 2,
                 "branch": "IT",

@@ -1,20 +1,39 @@
 // unirest is required to do REST stuff in Node
 var unirest = require('unirest');
 
-function getRecord(URL, ID) {
-    var APIURL = "http://localhost:5000/student/" + ID;
+function getRecord(ID) {
     unirest
-        .get(APIURL)
+        .get(getRecordURL(ID))
         .headers({ 'authkey': 'testingKEY' })
         .end(function (res) {
             console.log(res.body);
         });
 }
-postRecord("http://localhost:5000/student/register", 15051007, 9457894561, 4657981234, 24012016, "dayscholar");
-// getRecord(15051020);
-function postRecord(URI, ID, phoneno, fatherno, DOB, currentStatus) {
+if (process.argv.indexOf('-P') == -1) {
+    getRecord(process.argv[2]);
+
+}
+if (process.argv.indexOf('-G') == -1) {
+    postRecord(process.argv[2], 9457894561, 4657981234, 24012016, "dayscholar");
+}
+function postRecordURL() {
+    if (process.argv.indexOf('-LOCAL') == -1) {
+        return "http://coer-backend.herokuapp.com/student/register"
+    } else {
+        return "http://localhost:5000/student/register";
+    }
+}
+function getRecordURL(ID) {
+    if (process.argv.indexOf('-LOCAL') == -1) {
+        return "http://coer-backend.herokuapp.com/student/full/" + ID;
+    } else {
+        return "http://localhost:5000/student/full/" + ID;
+    }
+
+}
+function postRecord(ID, phoneno, fatherno, DOB, currentStatus) {
     unirest
-        .post(URI)
+        .post(postRecordURL())
         .headers({ 'authkey': 'SUPERPRIVATE' })
         .query({
             ID: ID,
