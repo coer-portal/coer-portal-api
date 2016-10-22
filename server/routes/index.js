@@ -7,5 +7,6 @@ module.exports = {
     defaultRoute: defaultRoute,
     studentGetByID: studentGetByID,
     studentRegister: studentRegister,
-    studentAttendance: studentAttendance
+    studentAttendance: studentAttendance.studentAttendance  
+    
 }

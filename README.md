@@ -112,7 +112,7 @@ What ever fields you want to update in Database. In ```JSON``` or ```urlencoded`
 JSON object with status of update.
 
 
-## Disclaimer and Some stuff that I am not sure where to put
+## Notes
 
 I used Node as the base, Express.js for Routing and MongoDB to store data. Also, Thanks to guys at Mashape.com for creating unirest.io. 
 
