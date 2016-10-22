@@ -1,7 +1,7 @@
 /* Seed Database
  * This is Template of the data that'll be stored in database
  */
-var data = require('../routes/student/student-attendance').studentAttendance;
+var data = require('../routes/student/student-attendance').data;
 // Function that returns correct value of hostel by checking the value of hostel supplied to it. 
 // Returns null if student is a Day Scholar and returns correct properties if student is a hosteler
 function getHostel(hostel) {
@@ -46,10 +46,11 @@ function getHostel(hostel) {
 module.exports = {
     // info is a method that returns a JSON template with all the value filled up.
     "info": function (_id, name, phoneno, fatherno, DOB, currentStatus, attendance, attenLastUpdatedOn, hostel) {
+        // console.log("NINJA: " + _id + " " + data.name + " " + phoneno + " " + fatherno + " " + currentStatus + " " + data.attendance + " " + data.attenLastUpdatedOn + " " + hostel);
         return {
             "_id": _id,
             "personal": {
-                "name": name,
+                "name": data.name,
                 "phoneno": phoneno,
                 "fatherno": fatherno,
                 "DOB": DOB,
@@ -57,8 +58,8 @@ module.exports = {
             },
             "academics": {
                 "attendance": {
-                    "attendance": attendance,
-                    "attenLastUpdatedOn": attenLastUpdatedOn
+                    "attendance": data.attendance,
+                    "attenLastUpdatedOn": data.attenLastUpdatedOn
                 },
                 "yearofstudy": 2,
                 "branch": "IT",

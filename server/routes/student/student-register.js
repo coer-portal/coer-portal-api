@@ -5,7 +5,6 @@ var sendResCode = require('../../sendResCode');
 var template = require('../../template/template');
 var unirest = require('unirest');
 
-
 // Ports configuration for heroku and a local setup 
 var MONGODB_URI = process.env.MONGODB_URI || process.env.MONGOURL;
 var PORT = process.env.PORT || process.env.APP_PORT;
@@ -103,14 +102,16 @@ function studentRegister(req, res) {
                                     throw err;
                                 } else {
                                     // Print the JSON to console
-                                    console.log(JSON.stringify(template.info(userData._id, response.raw_body.name, userData.phoneno, userData.fatherno, userData.DOB, userData.currentStatus, response.raw_body.attendance, response.raw_body.attenLastUpdatedOn, hostel)) + "\n");
-                                    res.send(template.info(userData._id, response.raw_body.name, userData.phoneno, userData.fatherno, userData.DOB, userData.currentStatus, response.raw_body.attendance, response.raw_body.attenLastUpdatedOn, hostel));
+                                    // console.log(JSON.stringify(template.info(userData._id, response.raw_body.name, userData.phoneno, userData.fatherno, userData.DOB, userData.currentStatus, response.raw_body.attendance, response.raw_body.attenLastUpdatedOn, hostel)) + "\n");
+                                    
+                                    // Send it as response
+                                    res.send(result);
                                 }
 
                             });
 
                             db.close(function () {
-                                console.log("Closing database after completing a POST operation. Request came from " + + req.path);
+                                console.log("Student-Register: Closing database after completing a POST operation.");
                             });
                         });
                     } else {
@@ -119,7 +120,7 @@ function studentRegister(req, res) {
                         console.log("User already exists. Returning user(" + userData._id + ") details\n");
 
                         // Print the user details to console
-                        console.log(JSON.stringify(docs[0]));
+                        // console.log(JSON.stringify(docs[0]));
 
                         // Send the same as the result of this call
                         res.send(docs[0]);

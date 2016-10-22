@@ -27,7 +27,7 @@ var studentAttendance = {
                             if (err) throw err;
                             else {
                                 var information = db.collection('information');
-                                console.log("\nRequest Path:" + req.path + "\n");
+                                // console.log("\nRequest Path:" + req.path + "\n");
                                 information.update(
                                     { _id: _id },
                                     {
@@ -37,7 +37,8 @@ var studentAttendance = {
                                             "academics.attendance.attendance": studentAttendance.data.attendance,
                                             "academics.attendance.attenLastUpdatedOn": studentAttendance.data.attenLastUpdatedOn
                                         }
-                                    });
+                                    },
+                                    { upsert: true });
                             }
                             db.close();
 
