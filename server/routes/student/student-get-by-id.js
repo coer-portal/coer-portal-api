@@ -1,4 +1,3 @@
-
 var sendResCode = require('../../sendResCode');
 var mongodb = require('mongodb');
 var mongo = mongodb.MongoClient;

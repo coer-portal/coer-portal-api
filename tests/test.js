@@ -10,22 +10,21 @@ function getRecord(URL, ID) {
             console.log(res.body);
         });
 }
-postRecord("http://coer-backend.herokuapp.com/student/register", 15051024, "ISHAN JAIN", 9457894561, 4657981234, 24012016, "hostel");
+postRecord("http://localhost:5000/student/register", 15051007, 9457894561, 4657981234, 24012016, "dayscholar");
 // getRecord(15051020);
-function postRecord(URI, ID, name, phoneno, fatherno, DOB, currentStatus) {
+function postRecord(URI, ID, phoneno, fatherno, DOB, currentStatus) {
     unirest
         .post(URI)
         .headers({ 'authkey': 'SUPERPRIVATE' })
         .query({
             ID: ID,
-            name: name,
             phoneno: phoneno,
             fatherno: fatherno,
             DOB: DOB,
             currentStatus: currentStatus
         })
         .end(function (res) {
-            if(res.error) {
+            if (res.error) {
                 throw res.error;
             }
             console.log(res.raw_body)
