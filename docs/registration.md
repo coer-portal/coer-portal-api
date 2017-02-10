@@ -36,12 +36,13 @@ This Endpoint is used to Register a Student.
 
 ```
 {
-    "error": "E101", // Error Code
+    "error": "E101",
     "invalidKeys": [
-        "_id"      // An Array of all the invalid keys
+        "_id"
         ]
 }
 ```
+invalidKeys field contains an Array of all the invalid values
 
 #### when the given ID is Invalid
 ```
@@ -57,7 +58,7 @@ This Endpoint is used to Register a Student.
 ```
 {
    "error": "E103",
-   "message":"Student ID already exists in Database",
+   "message":"Student ID already exists in Database"
 }
 ```
 
