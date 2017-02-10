@@ -1,5 +1,4 @@
-# College of Engineering, Roorkee - API
-This API will help in storing and routing of data on our servers. Currently, This API will be used in our Android App and we plan on creating a web app for this as well. It's like a hobby project that can teach us a lot of things about web that we don't know. 
+# College of Engineering, Roorkee Portal API
 
 # Installation
 
