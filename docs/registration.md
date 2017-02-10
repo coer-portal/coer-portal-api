@@ -36,9 +36,9 @@ This Endpoint is used to Register a Student.
 
 ```
 {
-    "error": "E101", //Error Code
+    "error": "E101", // Error Code
     "invalidKeys": [
-        "_id"      //An Array of all the invalid values
+        "_id"      // An Array of all the invalid keys
         ]
 }
 ```
@@ -46,8 +46,9 @@ This Endpoint is used to Register a Student.
 #### when the given ID is Invalid
 ```
 {
-    "error": 'E102',
-		"message": "Invalid ID"
+    "error": "E102",
+    "_deviceid": "ad5fd714096e2746f94307d5cf04", 
+    "message": "Invalid ID"
 }
 ```
 
@@ -64,8 +65,18 @@ This Endpoint is used to Register a Student.
 
 ```
 {
-   "error": 'E104',
-	 "message": "Errored in Storing Record to Database"
+   "error": "E104",
+   "message": "Errored in Storing Record to Database"
+}
+```
+#### Error Occurs in Fetching Data from College Database
+
+```
+{
+_deviceid: "ad5fd714096e2746f94307d5cf04",
+error: "E500",
+errorDetail: "<Error Message in Detail>",
+message: "Internal Server Error"
 }
 ```
 
@@ -73,12 +84,12 @@ This Endpoint is used to Register a Student.
 
 ```
 {
-    "error":0,
-    "message":"Successfully Created Record",
-    "_deviceid":"ad5fd714096e2746f94307d5cf04",
+    "error": 0,
+    "message": "Successfully Created Record",
+    "_deviceid": "ad5fd714096e2746f94307d5cf04",
     "data": {
-        "_id":"97465234",
-        "name":"Ishan Jain"
+        "_id": "97465234",
+        "name": "Ishan Jain"
         }
 }
 ```        
