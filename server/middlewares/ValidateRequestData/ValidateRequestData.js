@@ -29,16 +29,25 @@ module.exports = function (DataToValidate) {
 
 	function SendValidationResult() {
 		if (InvalidFieldArray.length == 0) {
-			return true;
+			return {
+				error: 0,
+				invalidKeys: InvalidFieldArray
+			};
 		} else {
-			return InvalidFieldArray;
+			return {
+				error: 'E101',
+				invalidKeys: InvalidFieldArray
+			};
 		}
 	}
 
 	if (DataToValidate) {
 		return ValidateData(SendValidationResult);
 	} else {
-		return false;
+		return {
+			error: 'E101',
+			invalidKeys: []
+		};
 	}
 };
 

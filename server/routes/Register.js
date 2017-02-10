@@ -1,17 +1,25 @@
 const express = require('express'),
+	Promise = require('bluebird'),
 	RegisterRouter = express.Router(),
 	ValidateDeviceID = require('../middlewares/ValidateDeviceID/ValidateDeviceID'),
-	ValidateRequestData = require('../middlewares/ValidateRequestData/ValidateRequestData');
+	ValidateRequestData = require('../middlewares/ValidateRequestData/ValidateRequestData'),
+	VerifyID = require('../middlewares/VerifyID/VerifyID');
 
 /*
+ *
+ * Check Documentation for help with error codes
+ *
  * Check for Device ID, If one exists continue with it and if it doesn't exists then create a new ID
  *
  * Validate The following data and if any data is invalid return a E101 error.
- * Check Documentation for help with error codes
  * Data To Validate: ID, phoneno, fatherno, Date of Birth, Location, password and APIKEY
  *
+ * Check if the Enter ID is valid by performing a check against College Database.
+ * If the ID is valid, Proceed to next step
+ * else send E102 Error
+ *
  * Check if the user already exists in Database
- * If the user exists return E102
+ * If the user exists return E103
  * If it's a new user then proceed with registration
  *
  *
@@ -40,14 +48,15 @@ RegisterRouter.post('*',
 			password: password,
 			_apikey: _apikey
 		});
-		if (ValidationResult === true) {
+		if (ValidationResult.error === 0) {
 			next();
 		} else {
 			res.send(ValidationResult);
 		}
 	},
 	(req, res, next) => {
-		res.send("hoho");
+		new Promise()
+
 	});
 
 module.exports = RegisterRouter;
