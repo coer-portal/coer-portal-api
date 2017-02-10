@@ -2,7 +2,9 @@ const express = require('express'),
 	app = express(),
 	RouteIndex = require('./routes/index'),
 	compression = require('compression'),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+	Mongo = require('mongodb'),
+	MongoClient = Mongo.MongoClient;
 
 app.use(compression());
 
@@ -18,6 +20,13 @@ if (process.env.PORT === "production") {
 	PORT = process.env.PORT;
 	MONGODB_URI = "mongodb://localhost:27017/heroku_c5m6f6x8";
 }
+MongoClient.connect(MONGODB_URI, (err, db) => {
+	if (err) {
+		throw err;
+	} else {
+		app.locals.db = db;
+	}
+});
 
 app.listen(PORT, (err) => {
 	if (err) {
