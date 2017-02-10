@@ -15,12 +15,13 @@ app.use(RouteIndex);
 app.disable('x-powered-by');
 
 let PORT = 5000,
-	MONGODB_URI = "mongodb://localhost:27017/coer";
-if (process.env.PORT === "production") {
+	MONGODB = "mongodb://localhost:27017/coer";
+
+if (process.env.NODE_ENV === "production") {
 	PORT = process.env.PORT;
-	MONGODB_URI = process.env.MONGODB_URI;
+	MONGODB = process.env.MONGODB_URI;
 }
-MongoClient.connect(MONGODB_URI, (err, db) => {
+MongoClient.connect(MONGODB, (err, db) => {
 	if (err) {
 		throw err;
 	} else {
