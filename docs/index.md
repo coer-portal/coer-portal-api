@@ -15,13 +15,13 @@ This Project is Licenses under AGPLv3 but feel free to Contact Us if you want to
 
 #### Necessary
 
-    [Redis](http://redis.io)
-    [MongoDB](http://mongodb.org)
-    [NodeJS](http://nodejs.org) Version 6.xx
+   [Redis](http://redis.io)
+   [MongoDB](http://mongodb.org)
+   [NodeJS](http://nodejs.org) Version 6.xx
 
 #### Optionals
 
-    [Yarn](https://yarnpkg.com)
+   [Yarn](https://yarnpkg.com)
 
 1. Clone the Repository
 
