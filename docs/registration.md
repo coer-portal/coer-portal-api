@@ -60,15 +60,7 @@ This Endpoint is used to Register a Student.
    "message":"Student ID already exists in Database",
 }
 ```
-   
-#### When an Error occurs in saving Student Details to Database
 
-```
-{
-   "error": "E104",
-   "message": "Errored in Storing Record to Database"
-}
-```
 #### Error Occurs in Fetching Data from College Database
 
 ```
@@ -77,6 +69,15 @@ This Endpoint is used to Register a Student.
 "error": "E500",
 "errorDetail": "<Error Message in Detail>",
 "message": "Internal Server Error"
+}
+```
+
+#### When an Error occurs in saving Student Details to Database
+
+```
+{
+   "error": "E104",
+   "message": "Errored in Storing Record to Database"
 }
 ```
 
