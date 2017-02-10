@@ -73,10 +73,10 @@ This Endpoint is used to Register a Student.
 
 ```
 {
-_deviceid: "ad5fd714096e2746f94307d5cf04",
-error: "E500",
-errorDetail: "<Error Message in Detail>",
-message: "Internal Server Error"
+"_deviceid": "ad5fd714096e2746f94307d5cf04",
+"error": "E500",
+"errorDetail": "<Error Message in Detail>",
+"message": "Internal Server Error"
 }
 ```
 
