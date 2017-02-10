@@ -18,7 +18,7 @@ let PORT = 5000,
 	MONGODB_URI = "mongodb://localhost:27017/coer";
 if (process.env.PORT === "production") {
 	PORT = process.env.PORT;
-	MONGODB_URI = "mongodb://localhost:27017/heroku_c5m6f6x8";
+	MONGODB_URI = process.env.MONGODB_URI;
 }
 MongoClient.connect(MONGODB_URI, (err, db) => {
 	if (err) {

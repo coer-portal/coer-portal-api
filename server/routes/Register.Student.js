@@ -16,13 +16,13 @@ const express = require('express'),
  * Validate The following data and if any data is invalid return a E101 error.
  * Data To Validate: ID, phoneno, fatherno, Date of Birth, Location, password and APIKEY
  *
- * Check if the Enter ID is valid by performing a check against College Database.
- * If the ID is valid, Proceed to next step
- * else send E102 Error
- *
  * Check if the user already exists in Database
  * If the user exists return E103
  * If it's a new user then proceed with registration
+ *
+ * Check if the Enter ID is valid by performing a check against College Database.
+ * If the ID is valid, Proceed to next step
+ * else send E102 Error
  *
  * Register the User
  * If An Error Occurs Send E104 Response
