@@ -1,11 +1,12 @@
 const express = require('express'),
 	Promise = require('bluebird'),
 	RegisterRouter = express.Router(),
-	ValidateDeviceID = require('../middlewares/ValidateDeviceID/ValidateDeviceID'),
-	ValidateRequestData = require('../middlewares/ValidateRequestData/ValidateRequestData'),
-	VerifyID = require('../middlewares/VerifyID/VerifyID'),
-	CheckExistence = require('../middlewares/CheckExistence/CheckExistence'),
-	StoreUser = require('../middlewares/StoreUser/StoreUser');
+	ValidateDeviceID = require('../../middlewares/ValidateDeviceID/ValidateDeviceID'),
+	ValidateRequestData = require('../../middlewares/ValidateRequestData/ValidateRequestData'),
+	VerifyID = require('../../middlewares/VerifyID/VerifyID'),
+	CheckExistence = require('../../middlewares/CheckExistence/CheckExistence'),
+	StorePassword = require('../../middlewares/StorePassword/StorePassword'),
+	StoreUser = require('../../middlewares/StoreUser/RegisterUser');
 
 /*
  *
@@ -24,6 +25,8 @@ const express = require('express'),
  * If the ID is valid, Proceed to next step
  * else send E102 Error
  *
+ * Store password
+ * Send E105 if error occurs
  * Register the User
  * If An Error Occurs Send E104 Response
  */
@@ -49,21 +52,25 @@ RegisterRouter.post('*',
 					next();
 				}
 			})
-			.catch(reject => {
-				res.send(JSON.stringify(reject));
+			.catch(error => {
+				res.send(JSON.stringify(error));
 			});
 	},
 	(req, res, next) => {
 		const db = req.app.locals.db,
-			studentRecord = db.collection('studentRecord');
+			studentRecord = db.collection('studentRecord'),
+			passwordVault = db.collection('passwordVault');
 
-		CheckExistence(req.body._id, studentRecord)
+		CheckExistence({_id: req.body._id, _deviceid: req._deviceid}, studentRecord, passwordVault)
 			.then(result => {
-				if (!result.error) {
+				if (result.error == 0) {
 					next();
+				} else {
+					res.send(JSON.stringify(result));
 				}
 			})
 			.catch(error => {
+				console.log(error);
 				res.send(JSON.stringify(error));
 			});
 	},
@@ -102,6 +109,24 @@ RegisterRouter.post('*',
 	},
 	(req, res, next) => {
 		const db = req.app.locals.db,
+			passwordVault = db.collection('passwordVault');
+
+		StorePassword({
+			password: req.headers.password,
+			_id: req.body._id,
+			_deviceid: req._deviceid
+		}, passwordVault)
+			.then(resolve => {
+				next();
+			}).catch(error => {
+			res.send(JSON.stringify({
+				error: error.error,
+				message: error.message
+			}));
+		});
+	},
+	(req, res, next) => {
+		const db = req.app.locals.db,
 			studentRecord = db.collection('studentRecord');
 
 		StoreUser({
@@ -110,7 +135,6 @@ RegisterRouter.post('*',
 			fatherno: req.body.fatherno,
 			_dob: req.body._dob,
 			location: req.body.location,
-			password: req.headers.password,
 			_deviceid: req.headers._deviceid,
 			name: req.StudentData.name
 		}, studentRecord)
@@ -121,6 +145,7 @@ RegisterRouter.post('*',
 				res.send(JSON.stringify(error));
 			});
 
-	});
+	}
+);
 
 module.exports = RegisterRouter;

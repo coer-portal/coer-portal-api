@@ -3,6 +3,7 @@ module.exports = function (DataToStore, studentRecord) {
 	return new Promise((resolve, reject) => {
 		studentRecord.insertOne({
 			_id: _id,
+			name: name,
 			phoneno: phoneno,
 			fatherno: fatherno,
 			location: location,

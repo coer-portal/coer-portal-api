@@ -1,7 +1,6 @@
 const moment = require('moment');
 
 module.exports = function (DataToValidate) {
-	//TODO: PROMISIFY!
 	const ValidationScheme = {
 		_id: ValidateNumbers(DataToValidate, "_id"),
 		phoneno: ValidateNumbers(DataToValidate, "phoneno"),

@@ -1,42 +1,39 @@
 {
-    "name": "coer-api",
-    "version": "1.0.0",
-    "description": "College of Engineering, Roorkee API",
-    "scripts": {
-        "start": "node server/index.js",
-        "test": "./node_modules/.bin/jest",
-        "test-dev": "./node_modules/.bin/jest --watch"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/coer-portal/coer-portal-api.git"
-    },
-    "keywords": [
-        "API"
-    ],
-    "author": "Ishan Jain <github.com/ishanjain28>",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/coer-portal/coer-portal-api/issues"
-    },
-    "homepage": "https://github.com/coer-portal/coer-portal-api#readme",
-    "dependencies": {
-        "bluebird": "^3.4.7",
-        "body-parser": "^1.16.0",
-        "chai": "^3.5.0",
-        "chai-http": "^3.0.0",
-        "compression": "^1.6.2",
-        "express": "^4.14.1",
-        "global": "^4.3.1",
-        "jest": "^18.1.0",
-        "mocha": "^3.2.0",
-        "moment": "^2.17.1",
-        "mongodb": "^2.2.22",
-        "redis": "^2.6.5",
-        "request": "^2.79.0"
-    },
-    "devDependencies": {
-        "eslint": "^3.15.0",
-        "jests": "^0.0.0"
-    }
+  "name": "coer-api",
+  "version": "1.0.0",
+  "description": "College of Engineering, Roorkee API",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "./node_modules/.bin/jest",
+    "test-dev": "./node_modules/.bin/jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coer-portal/coer-portal-api.git"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Ishan Jain <github.com/ishanjain28>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coer-portal/coer-portal-api/issues"
+  },
+  "homepage": "https://github.com/coer-portal/coer-portal-api#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.16.0",
+    "compression": "^1.6.2",
+    "express": "^4.14.1",
+    "global": "^4.3.1",
+    "jest": "^18.1.0",
+    "moment": "^2.17.1",
+    "mongodb": "^2.2.22",
+    "redis": "^2.6.5",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0"
+  }
 }
