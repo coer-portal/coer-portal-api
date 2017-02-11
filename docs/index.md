@@ -52,4 +52,4 @@ Server is Live on http://localhost:5000
 
 # API Reference
 
-## [Registration](https://coer-portal.github.io/coer-portal-api/registration)
+## [Register](https://coer-portal.github.io/coer-portal-api/register)

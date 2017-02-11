@@ -35,7 +35,7 @@ RegisterRouter.post('*',
 	},
 	(req, res, next) => {
 
-		let ValidationResult = ValidateRequestData({
+		ValidateRequestData({
 			_id: req.body._id,
 			phoneno: req.body.phoneno,
 			fatherno: req.body.fatherno,
@@ -43,12 +43,15 @@ RegisterRouter.post('*',
 			location: req.body.location,
 			password: req.headers.password,
 			_apikey: req.headers._apikey
-		});
-		if (ValidationResult.error === 0) {
-			next();
-		} else {
-			res.send(ValidationResult);
-		}
+		})
+			.then(resolve => {
+				if (resolve.error == 0) {
+					next();
+				}
+			})
+			.catch(reject => {
+				res.send(JSON.stringify(reject));
+			});
 	},
 	(req, res, next) => {
 		const db = req.app.locals.db,

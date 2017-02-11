@@ -13,7 +13,7 @@ module.exports = function (DataToValidate) {
 	};
 	let InvalidFieldArray = [];
 
-	function ValidateData(callback) {
+	if (DataToValidate) {
 		for (let key in DataToValidate) {
 			if (DataToValidate.hasOwnProperty(key)) {
 
@@ -24,33 +24,26 @@ module.exports = function (DataToValidate) {
 				}
 			}
 		}
-		return callback();
-	}
-
-	function SendValidationResult() {
-		if (InvalidFieldArray.length == 0) {
-			return {
-				error: 0,
-				invalidKeys: InvalidFieldArray
-			};
-		} else {
-			return {
-				error: 'E101',
-				invalidKeys: InvalidFieldArray
-			};
-		}
-	}
-
-	if (DataToValidate) {
-		return ValidateData(SendValidationResult);
+		return new Promise((resolve, reject) => {
+			if (InvalidFieldArray.length == 0) {
+				resolve({
+					error: 0,
+					invalidKeys: InvalidFieldArray
+				});
+			} else {
+				reject({
+					error: 'E101',
+					invalidKeys: InvalidFieldArray
+				});
+			}
+		});
 	} else {
-		return {
+		return Promise.reject({
 			error: 'E101',
-			invalidKeys: []
-		};
+			invalidKeys: InvalidFieldArray
+		});
 	}
 };
-
 function ValidateNumbers(DataToValidate, type) {
 	if (DataToValidate && DataToValidate[type]) {
 		let number = DataToValidate[type];
