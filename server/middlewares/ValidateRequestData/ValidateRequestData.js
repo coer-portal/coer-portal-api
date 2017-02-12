@@ -8,7 +8,9 @@ module.exports = function (DataToValidate) {
 		location: ValidateLocation(DataToValidate),
 		password: ValidatePassword(DataToValidate),
 		_apikey: ValidateApiKey(DataToValidate),
-		_dob: ValidateDOB(DataToValidate)
+		_dob: ValidateDOB(DataToValidate),
+		resettoken: ValidateTokens(DataToValidate),
+		accesstoken: ValidateTokens(DataToValidate)
 	};
 	let InvalidFieldArray = [];
 
@@ -82,6 +84,14 @@ function ValidateDOB(DataToValidate) {
 
 function ValidateApiKey(DataToValidate) {
 	if (DataToValidate && DataToValidate['_apikey'] === "TESTING") {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateTokens(DataToValidate) {
+	if (DataToValidate && (DataToValidate['accesstoken'] || DataToValidate['resettoken'])) {
 		return true;
 	} else {
 		return false;

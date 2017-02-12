@@ -9,7 +9,6 @@
     },
     "rules": {
         "semi": "warn",
-        "no-console": "off",
-        "no-undef": "off"
+        "no-console": "off"
     }
 }
