@@ -2,7 +2,7 @@ const crypto = require('crypto');
 
 module.exports = function (Data, redisClient) {
 	const {_id, _deviceid} = Data,
-		accesstoken = crypto.randomBytes(30).toString('hex'),
+		accesstoken = crypto.randomBytes(20).toString('hex'),
 		EXPIRETIME = 60 * 60 * 12;
 
 	return new Promise((resolve, reject) => {

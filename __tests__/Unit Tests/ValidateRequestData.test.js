@@ -3,28 +3,19 @@ const ValidateRequestData = require('../../server/middlewares/ValidateRequestDat
 // ValidateRequestData
 describe("Validate Request Data Module", () => {
 	test("Should return true if all values are Valid", () => {
-		expect(ValidateRequestData({
+		ValidateRequestData({
 			_id: 15051019,
 			phoneno: 7896451234,
-			fatheno: 9874653145,
-			_dob: 16102016,
-			_apikey: "TESTING",
+			fatherno: 9874653145,
 			password: "SUPERSECRETPASSWORD",
 			location: "hostel"
-		})).toBeTruthy();
-		expect(ValidateRequestData({
-			_id: 15051148,
-			phoneno: 7896451234,
-			fatheno: 9874653145,
-			_dob: 16101999,
-			_apikey: "TESTING",
-			password: "SUPERSECRETPASSWORD",
-			location: "dayscholar"
-		})).toBeTruthy();
+		}).then(result => {
+			expect(result).toEqual({error: 0, invalidKeys: []});
+		});
 	});
 
 	test("Should return an array containing all the Invalid Data if Some Data is Invalid", () => {
-		expect(ValidateRequestData({
+		ValidateRequestData({
 			_id: 15051019,
 			phoneno: 7896451234,
 			fatherno: 9874653145,
@@ -32,17 +23,10 @@ describe("Validate Request Data Module", () => {
 			_apikey: "TESTING",
 			password: "SUPERSECRETPASSWORD",
 			location: "hostelle"
-		})).toEqual(expect.arrayContaining(['location']));
-		expect(ValidateRequestData({
-			_id: 15051019,
-			phoneno: 7896451234,
-			fatherno: 9874653145,
-			_dob: 16102016,
-			_apikey: "TESTING",
-			password: "",
-			location: "hostel"
-		})).toEqual(expect.arrayContaining(['password']));
-		expect(ValidateRequestData({
+		}).catch(result => {
+			expect(result).toEqual({error: 'E101', invalidKeys: ['location']});
+		});
+		ValidateRequestData({
 			_id: 15051019,
 			phoneno: 7896451234,
 			fatherno: 9874653145,
@@ -50,8 +34,10 @@ describe("Validate Request Data Module", () => {
 			_apikey: "",
 			password: "SUPERSECRETPASSWORD",
 			location: "hostel"
-		})).toEqual(expect.arrayContaining(['_apikey']));
-		expect(ValidateRequestData({
+		}).catch(result => {
+			expect(result).toEqual({error: 'E101', invalidKeys: ['_apikey']});
+		});
+		ValidateRequestData({
 			_id: 1505109,
 			phoneno: 789451234,
 			fatherno: 987653145,
@@ -59,10 +45,14 @@ describe("Validate Request Data Module", () => {
 			_apikey: "TESTING",
 			password: "SUPERSECRETPASSWORD",
 			location: "hostel"
-		})).toEqual(expect.arrayContaining(['_id', 'phoneno', 'fatherno']));
+		}).catch(result => {
+			expect(result).toEqual({error: 'E101', invalidKeys: ["_id", "phoneno", "fatherno"]});
+		});
 	});
 
 	test("Should return false if No data is provided", () => {
-		expect(ValidateRequestData()).toBeFalsy();
+		ValidateRequestData().catch(result => {
+			expect(result).toEqual({"error": "E101", "invalidKeys": []});
+		});
 	});
 });

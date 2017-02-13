@@ -117,7 +117,9 @@ RegisterRouter.post('*',
 			_deviceid: req._deviceid
 		}, passwordVault)
 			.then(resolve => {
-				next();
+				if (resolve.error == 0) {
+					next();
+				}
 			}).catch(error => {
 			res.send(JSON.stringify({
 				error: error.error,
