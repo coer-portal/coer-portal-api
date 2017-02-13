@@ -3,7 +3,7 @@ const express = require('express'),
 	compression = require('compression'),
 	bodyParser = require('body-parser'),
 	redis = require('redis'),
-	// url = require('url'),
+	url = require('url'),
 	RouteIndex = require('./routes/index'),
 	app = express(),
 	MongoClient = Mongo.MongoClient;
@@ -30,14 +30,14 @@ if (process.env.NODE_ENV === "production") {
 	PORT = process.env.PORT;
 	MONGODB = process.env.MONGODB_URI;
 	// Connect to Redis and make it available on req.app.locals
-	// let rtgURL = url.parse(process.env.REDISTOGO_URL);
-	// let client = redis.createClient(rtgURL.port, rtgURL.hostname);
-	//client.auth(rtgURL.auth.split(":")[1]);
-	//app.locals.redisClient = client;
-}
+	let rtgURL = url.parse(process.env.REDISTOGO_URL);
+	let client = redis.createClient(rtgURL.port, rtgURL.hostname);
+	client.auth(rtgURL.auth.split(":")[1]);
+	app.locals.redisClient = client;
+} else {
 	// Connect to redis and make it available on req.app.locals in dev env
 	app.locals.redisClient = redis.createClient();
-
+}
 // Connect to MongoDB
 MongoClient.connect(MONGODB, (err, db) => {
 	if (err) {
