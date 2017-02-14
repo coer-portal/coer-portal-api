@@ -1,16 +1,16 @@
 const express = require('express'),
-	Routes = express.Router(),
-	RegisterRouter = require('./Register/Register.Student.js'),
-	LoginRouter = require('./Login/Login.Student'),
-	ForgotPasswordRouter = require('./ForgotPassword/ForgotPassword.Student'),
-	ChangePasswordRouter = require('./ChangePassword/ChangePassword.Student');
+    Routes = express.Router(),
+    RegisterRouter = require('./Register/Register.Student.js'),
+    LoginRouter = require('./Login/Login.Student'),
+    ForgotPasswordRouter = require('./ForgotPassword/ForgotPassword.Student'),
+    ChangePasswordRouter = require('./ChangePassword/ChangePassword.Student');
 
-Routes.post('/student/register', RegisterRouter);
+Routes.post('/register/student', RegisterRouter);
 
-Routes.post('/student/login', LoginRouter);
+Routes.post('/login/student', LoginRouter);
 
-Routes.post('/student/forgot-password', ForgotPasswordRouter);
+Routes.post('/forgot-password/student', ForgotPasswordRouter);
 
-Routes.post('/student/change-password', ChangePasswordRouter);
+Routes.post('/change-password/student', ChangePasswordRouter);
 
 module.exports = Routes;
