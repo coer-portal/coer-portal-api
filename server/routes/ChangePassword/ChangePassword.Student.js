@@ -1,9 +1,8 @@
 const express = require('express'),
-	Promise = require('bluebird'),
 	ChangePasswordRouter = express.Router(),
 	ValidateDeviceID = require('../../middlewares/ValidateDeviceID/ValidateDeviceID'),
 	ValidateRequestData = require('../../middlewares/ValidateRequestData/ValidateRequestData'),
-	VerifyResetToken = require('../../middlewares/VerifyResetToken/VerifyResetToken'),
+	VerifyToken = require('../../middlewares/VerifyToken/VerifyToken'),
 	UpdatePassword = require('../../middlewares/UpdatePassword/UpdatePassword');
 
 
@@ -30,10 +29,11 @@ ChangePasswordRouter.post('*',
 	(req, res, next) => {
 		const redisClient = req.app.locals.redisClient;
 
-		VerifyResetToken({
+		VerifyToken({
 			_id: req.body._id,
+			type: 'resettoken',
 			_deviceid: req.headers._deviceid,
-			resettoken: req.headers.resettoken
+			token: req.headers.resettoken
 		}, redisClient)
 			.then(result => {
 				if (result.error == 0) {
@@ -45,7 +45,7 @@ ChangePasswordRouter.post('*',
 			});
 
 	},
-	(req, res, next) => {
+	(req, res) => {
 		const db = req.app.locals.db,
 			passwordVault = db.collection('passwordVault');
 

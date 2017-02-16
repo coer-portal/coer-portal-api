@@ -8,7 +8,7 @@ module.exports = function (Data, redisClient) {
 	return new Promise((resolve, reject) => {
 		redisClient.hmset(_id, {
 			_deviceid: _deviceid,
-			resettoken: resettoken
+			token: resettoken
 		}, (err, status) => {
 			if (err) throw err;
 			if (status == "OK") {

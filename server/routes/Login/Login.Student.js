@@ -15,7 +15,8 @@ LoginRouter.post('*',
 	(req, res, next) => {
 		ValidateRequestData({
 			_id: req.body._id,
-			password: req.headers.password
+			password: req.headers.password,
+			_apikey: req.headers._apikey
 		})
 			.then(resolve => {
 				if (resolve.error == 0) {
@@ -35,6 +36,7 @@ LoginRouter.post('*',
 				if (result.error == 'E103') {
 					next();
 				} else {
+					result.error = 'E111';
 					res.send(JSON.stringify(result));
 				}
 			})

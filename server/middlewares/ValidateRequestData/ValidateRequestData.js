@@ -10,7 +10,8 @@ module.exports = function (DataToValidate) {
 		_apikey: ValidateApiKey(DataToValidate),
 		_dob: ValidateDOB(DataToValidate),
 		resettoken: ValidateTokens(DataToValidate),
-		accesstoken: ValidateTokens(DataToValidate)
+		accesstoken: ValidateTokens(DataToValidate),
+		_deviceid: ValidateDeviceid(DataToValidate)
 	};
 	let InvalidFieldArray = [];
 
@@ -92,6 +93,14 @@ function ValidateApiKey(DataToValidate) {
 
 function ValidateTokens(DataToValidate) {
 	if (DataToValidate && (DataToValidate['accesstoken'] || DataToValidate['resettoken'])) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateDeviceid(DataToValidate) {
+	if (DataToValidate && DataToValidate['_deviceid']) {
 		return true;
 	} else {
 		return false;

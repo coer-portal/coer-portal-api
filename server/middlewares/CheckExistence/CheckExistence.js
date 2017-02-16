@@ -51,12 +51,14 @@ function FindInPasswordVault({_id, _deviceid}, passwordVault) {
 			if (!passResult) {
 				resolve({
 					error: 0,
-					message: "New User, Please proceed to Registration",
+					message: "New User, Proceed to Registration",
 					data: {
-						_id: _id
+						_id: _id,
+						_deviceid: _deviceid
 					}
 				});
 			} else {
+				// Record Exists in studentRecord but doesn't exists in passwordVault, Serious Error!
 				reject({
 					error: 'E500',
 					message: "Internal Server Error",
