@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(compression());
 
 // Enable CORS 
-app.use(cors({ origin: ' http://coer-backend.ishanjain.me:8080/login/student' }));
+app.use(cors());
 
 // Use Router Available in routers/index
 app.use(RouteIndex);
@@ -31,13 +31,14 @@ let PORT = 5000,
 
 if (process.env.NODE_ENV === "production") {
     // Settings to be used in Production env
-    PORT = process.env.PORT;
+    PORT = process.env.PORT || PORT;
     MONGODB = process.env.MONGODB_URI;
     // Connect to Redis and make it available on req.app.locals
-    let rtgURL = url.parse(process.env.REDISTOGO_URL);
-    let client = redis.createClient(rtgURL.port, rtgURL.hostname);
-    client.auth(rtgURL.auth.split(":")[1]);
-    app.locals.redisClient = client;
+    // let rtgURL = url.parse(process.env.REDISTOGO_URL);
+    // let client = redis.createClient(rtgURL.port, rtgURL.hostname);
+    // client.auth(rtgURL.auth.split(":")[1]);
+
+    app.locals.redisClient = redis.createClient();
 } else {
     // Connect to redis and make it available on req.app.locals in dev env
     app.locals.redisClient = redis.createClient();
