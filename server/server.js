@@ -10,6 +10,9 @@ const express = require('express'),
 	app = express(),
 	MongoClient = Mongo.MongoClient;
 
+// For letsencrypt
+app.use('/.well-known', express.static(path.resolve(process.cwd(), '.well-known')));
+
 // Body Parser to easily access request data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -19,9 +22,6 @@ app.use(compression());
 
 // Enable CORS 
 app.use(cors());
-
-// For letsencrypt
-app.use('/.well-known', express.static(path.resolve(process.cwd(), 'dist', '.well-known')));
 
 // Use Router Available in routers/index
 app.use(RouteIndex);
