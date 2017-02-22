@@ -14,6 +14,6 @@ Routes.post('/forgot-password/student', ForgotPasswordRouter);
 
 Routes.post('/change-password/student', ChangePasswordRouter);
 
-Routes.post('/validate-token/student', ValidateToken);
+Routes.get('/validate-token/student/:_id', ValidateToken);
 
 module.exports = Routes;

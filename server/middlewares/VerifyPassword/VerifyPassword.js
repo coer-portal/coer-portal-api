@@ -15,18 +15,18 @@ module.exports = function (PasswordObject, passwordVault) {
 						resolve({
 							error: 0,
 							message: "Correct Password, Please Proceed",
+							_deviceid: _deviceid,
 							data: {
-								_id: _id,
-								_deviceid: _deviceid
+								_id: _id
 							}
 						});
 					} else {
 						reject({
 							error: 'E107',
 							message: "Wrong Password",
+							_deviceid: _deviceid,
 							data: {
-								_id: _id,
-								_deviceid: _deviceid
+								_id: _id
 							}
 						});
 					}

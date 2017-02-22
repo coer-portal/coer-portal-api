@@ -2,7 +2,7 @@
 
 ## Endpoint
 
-    /student/register
+    /register/student
 
 This Endpoint is used to Register a Student.
 

@@ -53,3 +53,16 @@ Server is Live on http://localhost:5000
 # API Reference
 
 ## [Register](https://coer-portal.github.io/coer-portal-api/register)
+> Endpoint used to register a Student
+
+## [Login](https://coer-portal.github.io/coer-portal-api/login)
+> Endpoint used to login user and get the accesstoken required to do any other business. 
+
+## [Forgot Password](https://coer-portal.github.io/coer-portal-api/forgot-password)
+> Endpoint used to get resettoken that can be used to change password of an user
+
+## [Change Password](https://coer-portal.github.io/coer-portal-api/change-password)
+> Endpoint used to get change password of an user. It is intended to be used only after receiving resettoken from [Forgot Password](https://coer-portal.github.io/coer-portal-api/forgot-password) Endpoint  
+
+## [Validate Token](https://coer-portal.github.io/coer-portal-api/coer-portal/validate-token)
+> Endpoint used to validate if the accesstoken is valid of invalid

@@ -4,10 +4,10 @@ const express = require('express'),
 	VerifyToken = require('../../middlewares/VerifyToken/VerifyToken');
 
 
-ValidateTokenRouter.post('*',
+ValidateTokenRouter.get('*',
 	(req, res, next) => {
 		ValidateRequestData({
-			_id: req.body._id,
+			_id: req.params['_id'],
 			_deviceid: req.headers._deviceid,
 			accesstoken: req.headers.accesstoken,
 			_apikey: req.headers._apikey,
@@ -23,7 +23,7 @@ ValidateTokenRouter.post('*',
 	(req, res) => {
 		const redisClient = req.app.locals.redisClient;
 		VerifyToken({
-			_id: req.body._id,
+			_id: req.params['_id'],
 			type: 'accesstoken',
 			_deviceid: req.headers._deviceid,
 			token: req.headers.accesstoken

@@ -14,20 +14,20 @@ module.exports = function (Data, redisClient) {
 			if (status == "OK") {
 				resolve({
 					error: 0,
-					accesstoken: accesstoken,
+					_deviceid: _deviceid,
 					message: "Login Successful",
 					data: {
-						_id: _id,
-						_deviceid: _deviceid
+						accesstoken: accesstoken,
+						_id: _id
 					}
 				});
 			} else {
 				reject({
 					error: 'E108',
 					message: "Error Occured, Please Retry",
+					_deviceid: _deviceid,
 					data: {
-						_id: _id,
-						_deviceid: _deviceid
+						_id: _id
 					}
 				});
 			}
