@@ -27,6 +27,7 @@ This Endpoint is used to Register a Student.
     fatherno: Student's Fathers Number
     location: Place where student lives
     _dob: Date of Birth of Student
+    user_type: Type of User, Can be either student or warden
     
 1. `location` can either be `hostel` or `dayscholar`. All other values are invalid.
 

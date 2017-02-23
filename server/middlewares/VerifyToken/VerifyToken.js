@@ -14,7 +14,8 @@ module.exports = function (Data, redisClient) {
 						message: "Token is correct, Please Proceed",
 						data: {
 							_id: _id,
-							_deviceid: _deviceid
+							_deviceid: _deviceid,
+							user_type: result.user_type
 						}
 					});
 				} else {
@@ -23,7 +24,9 @@ module.exports = function (Data, redisClient) {
 						message: "Token Expired, Please Login",
 						data: {
 							_id: _id,
-							_deviceid: _deviceid
+							_deviceid: _deviceid,
+							user_type: result.user_type
+
 						}
 					});
 				}
@@ -33,7 +36,8 @@ module.exports = function (Data, redisClient) {
 					message: "Token Expired, Please Login",
 					data: {
 						_id: _id,
-						_deviceid: _deviceid
+						_deviceid: _deviceid,
+						user_type: result.user_type
 					}
 				});
 			}

@@ -17,7 +17,7 @@ ValidateTokenRouter.get('*',
 					next();
 				}
 			}).catch(error => {
-			res.send(JSON.stringify({_id: req.params['_id']}));
+			res.send(JSON.stringify(error));
 		});
 	},
 	(req, res) => {

@@ -16,7 +16,8 @@ LoginRouter.post('*',
 		ValidateRequestData({
 			_id: req.body._id,
 			password: req.headers.password,
-			_apikey: req.headers._apikey
+			_apikey: req.headers._apikey,
+			user_type: req.body.user_type
 		})
 			.then(resolve => {
 				if (resolve.error == 0) {
@@ -65,11 +66,13 @@ LoginRouter.post('*',
 	(req, res, next) => {
 		const redisClient = req.app.locals.redisClient,
 			_id = req.body._id,
-			_deviceid = req._deviceid;
+			_deviceid = req._deviceid,
+			user_type= req.body.user_type;
 
 		GenerateAccessToken({
 			_id: _id,
-			_deviceid: _deviceid
+			_deviceid: _deviceid,
+			user_type: user_type
 		}, redisClient)
 			.then(result => {
 				res.send(JSON.stringify(result));

@@ -41,7 +41,7 @@ SubmitLeaveRouter.post('*',
 			_deviceid: req.headers._deviceid
 		}, redisClient)
 			.then(result => {
-				if (result.error == 0) {
+				if (result.error == 0 && result.data.user_type == "warden") {
 					next();
 				}
 			})

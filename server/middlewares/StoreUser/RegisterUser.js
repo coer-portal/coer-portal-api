@@ -1,5 +1,5 @@
 module.exports = function (DataToStore, studentRecord) {
-	const {_id, phoneno, fatherno, location, _dob, _deviceid, name} = DataToStore;
+	const {_id, phoneno, fatherno, location, _dob, _deviceid, name, user_type} = DataToStore;
 	return new Promise((resolve, reject) => {
 		studentRecord.insertOne({
 			_id: _id,
@@ -7,7 +7,8 @@ module.exports = function (DataToStore, studentRecord) {
 			phoneno: phoneno,
 			fatherno: fatherno,
 			location: location,
-			_dob: _dob
+			_dob: _dob,
+			user_type: user_type
 		}, (err, result) => {
 			if (err) {
 				throw err;

@@ -1,14 +1,15 @@
 const crypto = require('crypto');
 
 module.exports = function (Data, redisClient) {
-	const {_id, _deviceid} = Data,
+	const {_id, _deviceid, user_type} = Data,
 		accesstoken = crypto.randomBytes(20).toString('hex'),
 		EXPIRETIME = 60 * 60 * 24 * 5;
 
 	return new Promise((resolve, reject) => {
 		redisClient.hmset(_deviceid, {
 			_id: _id,
-			token: accesstoken
+			token: accesstoken,
+			user_type: user_type
 		}, (err, status) => {
 			if (err) throw err;
 			if (status == "OK") {
@@ -18,7 +19,8 @@ module.exports = function (Data, redisClient) {
 					message: "Login Successful",
 					data: {
 						accesstoken: accesstoken,
-						_id: _id
+						_id: _id,
+						user_type: user_type
 					}
 				});
 			} else {
@@ -27,7 +29,8 @@ module.exports = function (Data, redisClient) {
 					message: "Error Occured, Please Retry",
 					_deviceid: _deviceid,
 					data: {
-						_id: _id
+						_id: _id,
+						user_type: user_type
 					}
 				});
 			}

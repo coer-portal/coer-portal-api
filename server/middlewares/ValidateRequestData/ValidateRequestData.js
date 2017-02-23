@@ -20,7 +20,9 @@ module.exports = function (DataToValidate) {
 		year: ValidateYear(DataToValidate),
 		roomno: ValidateRoomno(DataToValidate),
 		semester: ValidateSemester(DataToValidate),
-		address: ValidateAddress(DataToValidate)
+		address: ValidateAddress(DataToValidate),
+		req_for: ValidateRequestFor(DataToValidate),
+		user_type: ValidateUserType(DataToValidate)
 	};
 	let InvalidFieldArray = [];
 
@@ -174,6 +176,22 @@ function ValidateSemester(DataToValidate) {
 
 function ValidateAddress(DataToValidate) {
 	if (DataToValidate && DataToValidate.address) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateRequestFor(DataToValidate) {
+	if (DataToValidate.req_for == "outpass" || DataToValidate.req_for == "leave") {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateUserType(DataToValidate) {
+	if (DataToValidate.user_type == "warden" || DataToValidate.user_type == "student") {
 		return true;
 	} else {
 		return false;
