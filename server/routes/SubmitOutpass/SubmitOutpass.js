@@ -41,8 +41,13 @@ SubmitLeaveRouter.post('*',
 			_deviceid: req.headers._deviceid
 		}, redisClient)
 			.then(result => {
-				if (result.error == 0 && result.data.user_type == "warden") {
+				if (result.error == 0 && result.data.user_type == "student") {
 					next();
+				} else {
+					res.send(JSON.stringify({
+						error: 'E400',
+						message: 'Not Allowed to access Records List'
+					}));
 				}
 			})
 			.catch(error => {
