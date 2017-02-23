@@ -30,7 +30,7 @@ PendingLeaveOutpass.get('*',
 		}, redisClient)
 			.then(result => {
 				// Handles Authorisation, Doesn't allows a Non-Warden to access data of all the students.
-				if (result.error == 0 && result.data.user_type == "student") {
+				if (result.error == 0 && result.data.user_type == "warden") {
 					next();
 				} else {
 					res.send(JSON.stringify({
