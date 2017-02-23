@@ -2,10 +2,10 @@ const Promise = require('bluebird');
 
 module.exports = function (Data, redisClient) {
 	const {_id, token, _deviceid, type} = Data;
-	const QueryKey = type === "resettoken" ? _id : _deviceid;
+	const key = type === "resettoken" ? _id : _deviceid;
 	return new Promise((resolve, reject) => {
 
-		redisClient.hgetall(QueryKey, (err, result) => {
+		redisClient.hgetall(key, (err, result) => {
 			if (err) throw err;
 			if (result) {
 				if (result.token === token) {
@@ -20,7 +20,7 @@ module.exports = function (Data, redisClient) {
 				} else {
 					reject({
 						error: 'E109',
-						message: "Token Expired, Please retry",
+						message: "Token Expired, Please Login",
 						data: {
 							_id: _id,
 							_deviceid: _deviceid
@@ -30,7 +30,7 @@ module.exports = function (Data, redisClient) {
 			} else {
 				reject({
 					error: 'E109',
-					message: "Token Expired, Please retry",
+					message: "Token Expired, Please Login",
 					data: {
 						_id: _id,
 						_deviceid: _deviceid

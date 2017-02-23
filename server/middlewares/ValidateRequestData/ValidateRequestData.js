@@ -11,7 +11,16 @@ module.exports = function (DataToValidate) {
 		_dob: ValidateDOB(DataToValidate),
 		resettoken: ValidateTokens(DataToValidate),
 		accesstoken: ValidateTokens(DataToValidate),
-		_deviceid: ValidateDeviceid(DataToValidate)
+		_deviceid: ValidateDeviceid(DataToValidate),
+		from: ValidateFromAndTo(DataToValidate, 'from'),
+		to: ValidateFromAndTo(DataToValidate, 'to'),
+		name: ValidateName(DataToValidate),
+		date: ValidateDate(DataToValidate),
+		branch: ValidateBranch(DataToValidate),
+		year: ValidateYear(DataToValidate),
+		roomno: ValidateRoomno(DataToValidate),
+		semester: ValidateSemester(DataToValidate),
+		address: ValidateAddress(DataToValidate)
 	};
 	let InvalidFieldArray = [];
 
@@ -101,6 +110,70 @@ function ValidateTokens(DataToValidate) {
 
 function ValidateDeviceid(DataToValidate) {
 	if (DataToValidate && DataToValidate['_deviceid']) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateFromAndTo(DataToValidate, key) {
+	if (DataToValidate && DataToValidate[key]) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateName(DataToValidate) {
+	if (DataToValidate && DataToValidate.name) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateDate(DataToValidate) {
+	if (DataToValidate && moment(DataToValidate['date'], "DDMMYYYY", true).isValid()) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateBranch(DataToValidate) {
+	if (DataToValidate && DataToValidate.branch) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateYear(DataToValidate) {
+	if (DataToValidate && DataToValidate.year >= 1 && DataToValidate.year <= 4) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateRoomno(DataToValidate) {
+	if (DataToValidate && DataToValidate.roomno) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateSemester(DataToValidate) {
+	if (DataToValidate && DataToValidate.semester >= 1 && DataToValidate.semester <= 8) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function ValidateAddress(DataToValidate) {
+	if (DataToValidate && DataToValidate.address) {
 		return true;
 	} else {
 		return false;

@@ -66,3 +66,6 @@ Server is Live on http://localhost:5000
 
 ## [Validate Token](https://coer-portal.github.io/coer-portal-api/coer-portal/validate-token)
 > Endpoint used to validate if the accesstoken is valid of invalid
+
+## [Submit Outpass](https://coer-portal.github.io/coer-portal-api/coer-portal/submit-outpass)
+> Endpoint used to Submit an Outpass to Warden
