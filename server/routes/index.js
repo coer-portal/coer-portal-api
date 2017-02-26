@@ -1,16 +1,22 @@
 const express = require('express'),
 	Routes = express.Router(),
-	RegisterRouter = require('./Register/Register.Student.js'),
-	LoginRouter = require('./Login/Login.Student'),
+	StudentRegisterRouter = require('./Register/Register.Student'),
+	WardenRegisterRouter = require('./Register/Register.Warden'),
+	StudentLoginRouter = require('./Login/Login.Student'),
+	WardenLoginRouter = require('./Login/Login.Warden'),
 	ForgotPasswordRouter = require('./ForgotPassword/ForgotPassword.Student'),
 	ChangePasswordRouter = require('./ChangePassword/ChangePassword.Student'),
 	ValidateTokenRouter = require('./ValidateToken/ValidateToken.Student'),
 	SubmitOutpassRouter = require('./SubmitOutpass/SubmitOutpass'),
 	PendingOutpassRouter = require('./PendingLeaveOutpass/PendingLeaveOutpass');
 
-Routes.post('/register/student', RegisterRouter);
+Routes.post('/register/student', StudentRegisterRouter);
 
-Routes.post('/login/student', LoginRouter);
+Routes.post('/register/warden', WardenRegisterRouter);
+
+Routes.post('/login/student', StudentLoginRouter);
+
+Routes.post('/login/warden', WardenLoginRouter);
 
 Routes.post('/forgot-password/student', ForgotPasswordRouter);
 

@@ -10,6 +10,14 @@ const express = require('express'),
 	app = express(),
 	MongoClient = Mongo.MongoClient;
 
+/*
+ *
+ * Check Documentation for help with error codes and program flow
+ * Feel free to email me at create an issue if you are having any problem with this API
+ *
+ */
+
+
 // For letsencrypt
 app.use('/.well-known', express.static(path.resolve(process.cwd(), '.well-known')));
 

@@ -46,7 +46,7 @@ SubmitLeaveRouter.post('*',
 				} else {
 					res.send(JSON.stringify({
 						error: 'E400',
-						message: 'Not Allowed to access Records List'
+						message: 'Not Allowed to create a Record'
 					}));
 				}
 			})

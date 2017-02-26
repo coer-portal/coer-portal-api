@@ -33,10 +33,10 @@ LoginRouter.post('*',
 	},
 	(req, res, next) => {
 		const db = req.app.locals.db,
-			studentRecord = db.collection('studentRecord'),
+			wardenRecord = db.collection('wardenRecord'),
 			passwordVault = db.collection('passwordVault');
 
-		CheckExistence({_id: req.body._id, _deviceid: req._deviceid}, studentRecord, passwordVault)
+		CheckExistence({_id: req.body._id, _deviceid: req._deviceid}, wardenRecord, passwordVault)
 			.then(result => {
 				if (result.error == 'E103') {
 					next();
@@ -75,7 +75,7 @@ LoginRouter.post('*',
 		GenerateAccessToken({
 			_id: _id,
 			_deviceid: _deviceid,
-			user_type: "student"
+			user_type: "warden"
 		}, redisClient)
 			.then(result => {
 				res.send(JSON.stringify(result));
