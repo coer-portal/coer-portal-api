@@ -6,7 +6,9 @@
     "postinstall": "npm rebuild",
     "start": "node server/server.js",
     "test": "./node_modules/.bin/jest",
-    "test-dev": "./node_modules/.bin/jest --watch"
+    "test-dev": "./node_modules/.bin/jest --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -32,9 +34,11 @@
     "moment": "^2.17.1",
     "mongodb": "^2.2.22",
     "redis": "^2.6.5",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "snyk": "^1.31.0"
   },
   "devDependencies": {
     "eslint": "^3.15.0"
-  }
+  },
+  "snyk": true
 }
